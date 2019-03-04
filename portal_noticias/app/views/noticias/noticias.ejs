@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+	<html lang="pt-br">
+		<head>
+			<meta charset="utf-8"/>
+			<title>Notícias</title>
+		</head>
+	<body>
+
+		<h1>Notícias</h1>
+
+		<table>
+			<thead>
+				<th>ID</th>
+				<th>Título</th>
+				<th>Notícia</th>
+				<th>Resumo</th>
+				<th>Autor</th>
+				<th>Data</th>
+			</thead>
+			<tbody>
+				<% for(var i = 0; i < noticias.length; i++) { %>
+					<tr>
+						<td><%= noticias[i].id_noticia %></td>
+						<td><%= noticias[i].titulo %></td>
+						<td><%= noticias[i].noticia %></td>
+						<td><%= noticias[i].resumo %></td>
+						<td><%= noticias[i].autor %></td>
+						<td><%= noticias[i].data_noticia %></td>
+					</tr>
+				<% } %>
+			</tbody>
+		</table>
+
+	</body>
+</html>

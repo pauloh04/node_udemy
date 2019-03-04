@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+	<html lang="pt-br">
+		<head>
+			<meta charset="utf-8"/>
+			<title>Notícias</title>
+		</head>
+	<body>
+
+		<h1>Notícia</h1>
+
+		<table>
+			<thead>
+				<th>ID</th>
+				<th>Título</th>
+				<th>Notícia</th>
+				<th>Resumo</th>
+				<th>Autor</th>
+				<th>Data</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td><%= noticia[0].id_noticia %></td>
+					<td><%= noticia[0].titulo %></td>
+					<td><%= noticia[0].noticia %></td>
+					<td><%= noticia[0].resumo %></td>
+					<td><%= noticia[0].autor %></td>
+					<td><%= noticia[0].data_noticia %></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</body>
+</html>
