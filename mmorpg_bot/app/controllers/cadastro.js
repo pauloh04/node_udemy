@@ -21,4 +21,6 @@ module.exports.cadastrar = function(application, req, res){
 
     var UsuariosDAO = new application.app.models.UsuariosDAO(connection);
     UsuariosDAO.inserirUsuario(dadosForm);
+
+    res.send('Opa');
 }
