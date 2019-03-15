@@ -14,9 +14,9 @@ module.exports.autenticar = function(application, req, res){
         res.render('index', {validacao: errors});
         return;
     }
+    
+    var connection = application.config.dbConnection;
 
-    // var connection = application.config.dbConnection;
-
-    // var UsuariosDAO = new application.app.models.UsuariosDAO(connection);
-    // UsuariosDAO.autenticaUsuario(dadosForm);
+    var UsuariosDAO = new application.app.models.UsuariosDAO(connection);
+    UsuariosDAO.autenticarUsuario(dadosForm, req, res);
 }
