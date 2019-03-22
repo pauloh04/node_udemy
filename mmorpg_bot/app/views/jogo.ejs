@@ -23,7 +23,7 @@
 			});
 
 			$('#btn_aldeoes').click(function(){
-				$('#msg_erros').hide();
+				$('#msg').hide();
 				$.ajax({
 					url: '/aldeoes',
 					method: 'GET',
@@ -34,16 +34,34 @@
 			});
 
 			$('#btn_pergaminho').click(function(){
+				$('#msg').hide();
 				$.ajax({
 					url: '/pergaminhos',
 					method: 'GET',
 					success: function(data){
 						$('#acoes').html(data);
+						clearTimeout(timerId);
+						cronometro();
 					}
 				});
 			});
 
 		});
+
+		var timerId = null;
+		function cronometro(){
+			$(".tempo_restante").each(function(){
+				var segundos = $(this).html();
+				var segundos_atuais = parseInt(segundos) - 1;
+
+				if(segundos_atuais < 0) {
+					window.location = '/jogo?msg=C';
+				} else {
+					$(this).html(segundos_atuais);
+				}
+			});
+			timerId = setTimeout('cronometro()', 1000);
+		}
 	</script>
 
 	<body class="body-jogo">
@@ -58,12 +76,24 @@
 
 	    <div class="container">
 				
-				<% if(comando_invalido == 'S') { %>
-					<div class="alert alert-danger" id="msg_erros">
+				<% if(msg == 'A') { %>
+					<div class="alert alert-danger" id="msg">
 						<strong>Operação inválida!</strong>
 					</div>
+				<% } else if(msg == 'B') { %>
+					<div class="alert alert-info" id="msg">
+						<strong>Ação realizada por sucesso!</strong>
+					</div>
+				<% } else if(msg == 'C') { %>
+					<div class="alert alert-info" id="msg">
+						<strong>Senhor, a atividade ordenada foi finalizada!</strong>
+					</div>
+				<% } else if(msg == 'D') { %>
+					<div class="alert alert-info" id="msg">
+						<strong>Senhor, sua ordem foi revogada!</strong>
+					</div>
 				<% } %>
-				
+
 				<div class="row">
 	    		<div class="col-sm-3 casa">
 					<img src="images/casa_<%= img_casa %>.jpg" />
