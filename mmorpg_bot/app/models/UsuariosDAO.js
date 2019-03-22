@@ -1,3 +1,6 @@
+/* importar o módulo do crypto */
+var crypto = require('crypto');
+
 class UsuariosDAO {
     constructor(connection) {
         this._connection = connection();
@@ -6,6 +9,7 @@ class UsuariosDAO {
     inserirUsuario(usuario) {
         this._connection.open(function(err, mongoclient){
             mongoclient.collection("usuarios", function(err, collection){
+                usuario.senha = crypto.createHash("md5").update(usuario.senha).digest("hex");
                 collection.insert(usuario);
                 mongoclient.close();
             });
@@ -15,6 +19,9 @@ class UsuariosDAO {
     autenticarUsuario(usuario, req, res){
         this._connection.open(function(err, mongoclient){
             mongoclient.collection("usuarios", function(err, collection){
+
+                usuario.senha = crypto.createHash("md5").update(usuario.senha).digest("hex");
+                
                 collection.find(usuario).toArray(function(err, result){
                     if(result[0] != undefined){
                         req.session.autorizado = true;
